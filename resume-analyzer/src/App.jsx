@@ -16,11 +16,12 @@ function App() {
       {analysisResult && (
         <div className="mt-4 p-3 border">
           <h4>Analysis Result:</h4>
-          <pre>{JSON.stringify(analysisResult, null, 2)}</pre>
+          <p><strong>Matching Skills:</strong> {analysisResult.matchedSkills.join(", ") || "None"}</p>
+          <p><strong>Resume Score:</strong> {analysisResult.score}</p>
+          <pre className="mt-3 p-2 border">{analysisResult.text.substring(0, 500)}...</pre>
         </div>
       )}
     </div>
   );
 }
-
 export default App;
