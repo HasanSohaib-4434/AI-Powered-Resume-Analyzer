@@ -34,10 +34,21 @@ const ResumeUploader = ({ onAnalysisComplete }) => {
   };
 
   return (
-    <div className="container text-center mt-4">
-      <h3>Upload Resume</h3>
-      <input type="file" accept=".pdf,.docx" onChange={handleFileChange} className="form-control" />
-      <button className="btn btn-success mt-3" onClick={handleUpload} disabled={uploading}>
+    <div className="w-100 max-w-md mx-auto text-center">
+      <h3 className="mb-4">Upload Your Resume</h3>
+      <div className="mb-3">
+        <input
+          type="file"
+          accept=".pdf,.docx"
+          onChange={handleFileChange}
+          className="form-control form-control-lg"
+        />
+      </div>
+      <button
+        className={`btn btn-lg btn-primary mt-3 ${uploading ? "disabled" : ""}`}
+        onClick={handleUpload}
+        disabled={uploading}
+      >
         {uploading ? "Uploading..." : "Upload & Analyze"}
       </button>
     </div>

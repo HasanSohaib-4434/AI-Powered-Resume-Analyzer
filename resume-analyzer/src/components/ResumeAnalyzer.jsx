@@ -1,38 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 
-function ResumeAnalyzer({ text }) {
-  const [score, setScore] = useState(null);
-  const keywords = [
-    "React",
-    "JavaScript",
-    "Node.js",
-    "CSS",
-    "MongoDB",
-    "Python",
-  ];
-
-  const analyzeResume = () => {
-    let matchCount = keywords.filter((word) => text.includes(word)).length;
-    let finalScore = ((matchCount / keywords.length) * 100).toFixed(2);
-    setScore(finalScore);
-  };
-
+function ResumeAnalyzer({ text, matchedSkills, score }) {
   return (
-    <div className="container text-center mt-4">
-      <h3>Resume Analysis</h3>
-      <button className="btn btn-primary mt-2" onClick={analyzeResume}>
-        Analyze Resume
-      </button>
-      {score !== null && (
-        <div className="alert alert-info mt-3">
-          <h5>Resume Score: {score}%</h5>
-          <p>
-            {score > 50
-              ? "Great job! Your resume is strong."
-              : "Consider improving your resume with more relevant skills."}
-          </p>
+    <div className="d-flex justify-content-center align-items-center min-vh-100">
+      <div className="container mt-4">
+        <h3 className="text-center">Resume Analysis Result</h3>
+        <div className="alert alert-info mt-4">
+          <h5 className="text-center">Resume Score: {score}</h5>
+          {matchedSkills.length > 0 ? (
+            <>
+              <p><strong>Matching Skills:</strong> {matchedSkills.join(", ")}</p>
+              <p>
+                {score > 50
+                  ? "Great job! Your resume is strong."
+                  : "Consider improving your resume with more relevant skills."}
+              </p>
+            </>
+          ) : (
+            <p>No matching skills found. Consider adding more relevant skills to your resume.</p>
+          )}
         </div>
-      )}
+        <h5>Extracted Text (Preview):</h5>
+        <pre className="mt-3 p-2 border bg-light">{text.substring(0, 500)}...</pre>
+      </div>
     </div>
   );
 }
